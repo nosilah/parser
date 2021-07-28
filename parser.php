@@ -3,30 +3,28 @@ error_reporting(0);
 ini_set('display_errors', 0);
 
 
-
 $info = [];
 
 
 
 $pages = generateUrl('http://www.zernovoz.su/cargo/pages_1', '/html/body/div/div/div[@id="pages"]/a', 'http://www.zernovoz.su/cargo/pages_');
 
-// echo '<pre>';
+echo '<pre>';
 
-// print_r($pages);
-// echo '</pre>';
+print_r($pages);
+echo '</pre>';
 
 
-for ($i = 0; $i < count($pages); $i++) {
+for ($i = 1; $i < 5; $i++) {
     $dom = new DOMDocument();
 
-    $dom->loadHTMLFile($pages[$i]);
+    $dom->loadHTMLFile("{$pages[$i]}");
 
     $xpath = '/html/body/div/div/div/a';
     $DomXpath = new DOMXPath($dom);
-    $elements = $DomXpath->query($xpath);
-
 
     for ($a = 0; $a < 30; $a++) {
+        
         $number = $DomXpath->query($xpath . '/div/div[@class="number hidden-xs hidden-sm"]');
         $date = $DomXpath->query($xpath . '/div/div[@class="date"]');
         $dist = $DomXpath->query($xpath . '/div/span[@class="dist"]');
@@ -36,8 +34,7 @@ for ($i = 0; $i < count($pages); $i++) {
         $price = $DomXpath->query($xpath . '/div[@class="col-md-2 col-xs-3 price-row hidden-xs hidden-sm"]');
         $contacts = $DomXpath->query($xpath . '/div[@class="col-md-2 col-xs-12 contact-row"]');
 
-        $row = new row($number->nodeValue, $date->nodeValue, $dist->nodeValue, $timing->nodeValue, $loading_place->nodeValue, $unloading_place->nodeValue, $cargo->nodeValue, $price->nodeValue, $contacts->nodeValue);
-
+       
         $row = new row(
             $number->item($a)->nodeValue,
             $date->item($a)->nodeValue,
@@ -54,6 +51,7 @@ for ($i = 0; $i < count($pages); $i++) {
 
     
 }
+
 
 
 

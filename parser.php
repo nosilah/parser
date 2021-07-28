@@ -3,7 +3,7 @@ error_reporting(0);
 ini_set('display_errors', 0);
 
 
-$info = [];
+$data = [];
 
 
 
@@ -46,7 +46,7 @@ for ($i = 1; $i < 5; $i++) {
             $contacts->item($a)->nodeValue
         );
 
-        array_push($info, $row);
+        array_push($data, $row);
     }
 
     
@@ -61,7 +61,7 @@ for ($i = 1; $i < 5; $i++) {
 
 echo '<pre>';
 
-print_r($info);
+print_r($data);
 echo '</pre>';
 
 function generateUrl($mainUrl, $xpathPaganations, $url)
